@@ -32,7 +32,7 @@ public class Gun
     {
         //Identifier        Name      FireRate  BulletSpeed     BulletTimer
         {"Pistol", new Gun("Pistol",       1,     100,           0)},
-        {"Famas", new Gun("Famas",         10,     200,          0.1f)},
+        {"Famas", new Gun("Famas",         3,     200,          0.1f)},
         {"ShotGun", new Gun("ShotGun",         5,     50,          0)}
     };
 
