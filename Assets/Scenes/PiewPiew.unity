@@ -637,6 +637,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ch46_nonPBR
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: a8c269563cf1ae74192037a11f4c7947, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4f8b0c1b33d2faa429f885b9c6898329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8c269563cf1ae74192037a11f4c7947, type: 3}
 --- !u!1 &1610398462 stripped
