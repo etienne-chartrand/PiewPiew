@@ -56,7 +56,8 @@ public class GunManager : MonoBehaviour
         {
             Rigidbody bullet;
             bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
-            bullet.velocity = transform.TransformDirection(gunPoint.transform.forward * equippedGun.BulletSpeed);
+            //bullet.velocity = transform.TransformDirection(gunPoint.transform.forward * equippedGun.BulletSpeed);  Fonction TransformDirection Convertit local to WorldSpace(donc pas bon)
+            bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
             yield return StartCoroutine(BulletTimer());
         }
     }

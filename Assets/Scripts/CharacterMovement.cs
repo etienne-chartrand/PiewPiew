@@ -7,7 +7,6 @@ public class CharacterMovement : MonoBehaviour
     //HealthSystem
     public int maxHealth = 100;
     public int currentHealth;
-
     public HealthBar healthBar;
 
 
@@ -16,7 +15,8 @@ public class CharacterMovement : MonoBehaviour
     public Rigidbody rb; // Set the variable 'rb' as Rigibody
     public Vector3 movement; // Set the variable 'movement' as a Vector3 (x,y,z)
 
-
+    //Camera
+    private Camera mainCam;
 
     void Start()
     {
@@ -25,6 +25,8 @@ public class CharacterMovement : MonoBehaviour
 
         // find the Rigidbody of this game object and add it to the variable 'rb'
         rb = this.GetComponent<Rigidbody>();
+
+        mainCam = Camera.main;
     }
 
 
@@ -53,6 +55,19 @@ public class CharacterMovement : MonoBehaviour
     void FixedUpdate()
     {
         moveCharacter(movement); // We call the function 'moveCharacter' in FixedUpdate for Physics movement
+
+
+        //Player rotate selon l'endroit de la souris
+        Ray cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
+
+        if(groundPlane.Raycast(cameraRay, out rayLength))
+        {
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+            //Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
+            transform.LookAt(new Vector3(pointToLook.x,transform.position.y,pointToLook.z));
+        }
     }
 
 
