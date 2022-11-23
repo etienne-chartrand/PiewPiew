@@ -8,24 +8,20 @@ public class GunManager : MonoBehaviour
     public GameObject gunPoint;
     public int bulletForce;
 
+    public Camera mainCam;
     public LineRenderer lineRenderer;
 
-
-    private int balleCree;
-    public int FireRate;
-    public float timeBetweenBullets;
-
-    int[] FireRateArray = { 1, 10, 20 };
-    int[] bulletForceArray = { 150, 200, 50 };
-    float[] timeArray = { 0, 0.1f, 0 };
-
     public Gun equippedGun;
+    private bool isShooting;
 
     public int arrayIndex;
     // Start is called before the first frame update
     void Start()
     {
+        isShooting = false;
         equippedGun = Gun.GunDictionary["Pistol"];
+        lineRenderer = GetComponent<LineRenderer>();
+        DisableLaser();
     }
 
     // Update is called once per frame
@@ -58,12 +54,30 @@ public class GunManager : MonoBehaviour
             StartCoroutine(BulletDelay());
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && equippedGun == Gun.GunDictionary["Laser"])
         {
             UpdateLaser();
         }
 
+        if(Input.GetMouseButton(0) && equippedGun == Gun.GunDictionary["MachineGun"])
+        {
+            while (isShooting)
+            {
+
+            }
+
+            if (!isShooting)
+            {
+                isShooting = true;
+            }
+        }
+
         if (Input.GetMouseButtonUp(0))
+        {
+            isShooting = false;
+        }
+
+        if (Input.GetMouseButtonUp(0) && equippedGun == Gun.GunDictionary["Laser"])
         {
             DisableLaser();
         }
@@ -77,7 +91,6 @@ public class GunManager : MonoBehaviour
             {
                 Rigidbody bullet;
                 bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
-                //bullet.velocity = transform.TransformDirection(gunPoint.transform.forward * equippedGun.BulletSpeed);  Fonction TransformDirection Convertit local to WorldSpace(donc pas bon)
                 bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
                 yield return StartCoroutine(BulletTimer());
             }
@@ -111,6 +124,18 @@ public class GunManager : MonoBehaviour
 
     void UpdateLaser()
     {
-        
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 15.3f))
+        {
+            hit.point = transform.InverseTransformPoint(hit.point);
+
+            lineRenderer.SetPosition(1, hit.point);
+            
+        }
+        else
+        {
+            lineRenderer.SetPosition(1, new Vector3(0, 0.75f, 150f));
+        }
     }
 }
