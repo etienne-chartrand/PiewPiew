@@ -10,10 +10,14 @@ public class UIManager : MonoBehaviour
 
     public GameObject gameOverScreen;
 
+    public GameObject winScreen;
+
     // Start is called before the first frame update
     void Start()
     {
         gameOverScreen.SetActive(false);
+
+        winScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,6 +28,12 @@ public class UIManager : MonoBehaviour
             characterMovement.enabled=false;
 
             gameOverScreen.SetActive(true);
+        }
+        if(characterMovement.jeuFini == true)
+        { 
+            winScreen.SetActive(true);
+
+            characterMovement.enabled = false;
         }
     }
     public void RestartButton()

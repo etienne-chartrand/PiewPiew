@@ -18,8 +18,11 @@ public class CharacterMovement : MonoBehaviour
     //Camera
     private Camera mainCam;
 
+    public bool jeuFini;
+
     void Start()
     {
+        jeuFini = false;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
 
@@ -79,4 +82,15 @@ public class CharacterMovement : MonoBehaviour
         // and also multiply 'Time.fixedDeltaTime' to keep the movement consistant on all devices
         rb.velocity = direction * speed * Time.fixedDeltaTime;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "fin")
+        {
+            jeuFini = true;
+        }
+    }
+
+    
+    
 }
