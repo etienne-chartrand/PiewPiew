@@ -14,7 +14,7 @@ public class Gun
 
     public bool HasBullet { get; set; }
 
-    public int bulletMag { get; set}
+    public int bulletMag { get; set; }
 
     public Gun()
     {
