@@ -14,6 +14,8 @@ public class Gun
 
     public bool HasBullet { get; set; }
 
+    public int bulletMag { get; set}
+
     public Gun()
     {
         this.GunName = "";
@@ -21,9 +23,10 @@ public class Gun
         this.BulletSpeed = 0;
         this.BulletSpeed = 0;
         this.HasBullet = true;
+        this.bulletMag = 0;
     }
 
-    public Gun(string gunName, int fireRate, int bulletSpeed, float bulletTimer, bool hasBullet)
+    public Gun(string gunName, int fireRate, int bulletSpeed, float bulletTimer, bool hasBullet, int bulletMag)
     {
         GunName = gunName;
         FireRate = fireRate;
@@ -34,12 +37,12 @@ public class Gun
 
     public static Dictionary<string, Gun> GunDictionary = new Dictionary<string, Gun>()
     {
-        //Identifier                 Name         FireRate  BulletSpeed     BulletTimer    HasBullet
-        {"Pistol", new Gun(        "Pistol",         1,     100,               0,            true)},
-        {"Famas", new Gun(         "Famas",          3,     200,              0.1f,          true)},
-        {"ShotGun", new Gun(       "ShotGun",        5,     50,                0,            true)},
-        {"MachineGun", new Gun(    "MachineGun",     1,     200,               0 ,           true)},
-        {"Laser", new Gun(         "Laser",          0,     0,                 0,            false)}
+        //Identifier                 Name         FireRate  BulletSpeed     BulletTimer    HasBullet      bulletMag
+        {"Pistol", new Gun(        "Pistol",         1,     100,               0,            true,           12)},
+        {"Famas", new Gun(         "Famas",          3,     200,              0.1f,          true,           30)},
+        {"ShotGun", new Gun(       "ShotGun",        5,     50,                0,            true,            6)},
+        {"MachineGun", new Gun(    "MachineGun",     1,     200,               0.1f,         true,           200)},
+        {"Laser", new Gun(         "Laser",          0,     0,                 0,            false,           0)}
     };
 
     
