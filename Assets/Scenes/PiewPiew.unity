@@ -2702,6 +2702,7 @@ GameObject:
   - component: {fileID: 1610398463}
   - component: {fileID: 1610398466}
   - component: {fileID: 1610398464}
+  - component: {fileID: 5866666020440901485}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4002,6 +4003,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5866666020440901485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148482541484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67841c731ea51fa49aad1a125d754e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashSpeed: 150
+  dashEffect: {fileID: 4806140084898159702, guid: c689b2fefbb019e4298318413326c898, type: 3}
 --- !u!4 &5901452234264465301
 Transform:
   m_ObjectHideFlags: 0
