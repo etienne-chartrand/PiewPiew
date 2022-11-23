@@ -8,6 +8,8 @@ public class GunManager : MonoBehaviour
     public GameObject gunPoint;
     public int bulletForce;
 
+    public LineRenderer lineRenderer;
+
 
     private int balleCree;
     public int FireRate;
@@ -24,7 +26,6 @@ public class GunManager : MonoBehaviour
     void Start()
     {
         equippedGun = Gun.GunDictionary["Pistol"];
-
     }
 
     // Update is called once per frame
@@ -42,23 +43,48 @@ public class GunManager : MonoBehaviour
         {
             equippedGun = Gun.GunDictionary["ShotGun"];
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            equippedGun = Gun.GunDictionary["MachineGun"];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            equippedGun = Gun.GunDictionary["Laser"];
+        }
+
 
         if (Input.GetMouseButtonDown(0))
         {
-           
             StartCoroutine(BulletDelay());
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            UpdateLaser();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            DisableLaser();
         }
     }
 
     public IEnumerator BulletDelay()
     {
-        for (int i = 0; i < equippedGun.FireRate; i++)
+        if (equippedGun.HasBullet)
         {
-            Rigidbody bullet;
-            bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
-            //bullet.velocity = transform.TransformDirection(gunPoint.transform.forward * equippedGun.BulletSpeed);  Fonction TransformDirection Convertit local to WorldSpace(donc pas bon)
-            bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
-            yield return StartCoroutine(BulletTimer());
+            for (int i = 0; i < equippedGun.FireRate; i++)
+            {
+                Rigidbody bullet;
+                bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
+                //bullet.velocity = transform.TransformDirection(gunPoint.transform.forward * equippedGun.BulletSpeed);  Fonction TransformDirection Convertit local to WorldSpace(donc pas bon)
+                bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
+                yield return StartCoroutine(BulletTimer());
+            }
+        }
+        else
+        {
+            EnableLaser();
         }
     }
 
@@ -71,5 +97,20 @@ public class GunManager : MonoBehaviour
             timer -= Time.deltaTime;
             yield return null;
         }
+    }
+
+    void EnableLaser()
+    {
+        lineRenderer.enabled = true;
+    }
+
+    void DisableLaser()
+    {
+        lineRenderer.enabled = false;
+    }
+
+    void UpdateLaser()
+    {
+        
     }
 }
