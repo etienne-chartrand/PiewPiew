@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class UIManager : MonoBehaviour
 
             gameOverScreen.SetActive(true);
         }
+    }
+    public void RestartButton()
+    {
+        SceneManager.LoadScene("PiewPiew");
     }
     
 }
