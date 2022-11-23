@@ -32,10 +32,10 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.K))
-        //{
-        //    TakeDamage(20);
-        //}
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(20);
+        }
 
         // In Update we get the Input for left, right, up and down and put it in the variable 'movement'...
         // We only get the input of x and z, y is left at 0 as it's not required
