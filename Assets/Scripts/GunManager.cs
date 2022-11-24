@@ -6,17 +6,21 @@ public class GunManager : MonoBehaviour
 {
     public Rigidbody bulletPrefab;
     public GameObject gunPoint;
+    public BulletCount bulletCount;
 
     public Camera mainCam;
     public LineRenderer lineRenderer;
 
     public Gun equippedGun;
 
+    private bool isReloading = false;
+
     // Start is called before the first frame update
     void Start()
     {
         equippedGun = Gun.GunDictionary["Pistol"];
-        lineRenderer = GetComponent<LineRenderer>();
+        bulletCount.SetBulletCount(equippedGun.MaxBulletMag);
+        lineRenderer = GetComponentInChildren<LineRenderer>();
         DisableLaser();
     }
 
@@ -27,51 +31,66 @@ public class GunManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             equippedGun = Gun.GunDictionary["Pistol"];
+            bulletCount.SetBulletCount(equippedGun.CurrentBulletMag); 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             equippedGun = Gun.GunDictionary["Famas"];
+            bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             equippedGun = Gun.GunDictionary["ShotGun"];
+            bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             equippedGun = Gun.GunDictionary["MachineGun"];
+            bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             equippedGun = Gun.GunDictionary["Laser"];
+            bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
         }
 
-        //Permet de tirer
-        if (Input.GetMouseButtonDown(0))
+        if (!isReloading)
         {
-            StartCoroutine(BulletDelay());
+            //Permet de tirer
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(BulletDelay());
+            }
+
+            //Si laser est equip
+            if (Input.GetMouseButton(0) && equippedGun == Gun.GunDictionary["Laser"])
+            {
+                UpdateLaser();
+            }
+
+            //Si MachineGun est equip et on tir
+            if (Input.GetMouseButtonDown(0) && equippedGun == Gun.GunDictionary["MachineGun"])
+            {
+                StartCoroutine(MachineGunShooting());
+            }
+
+            //Permet de fermer le laser
+            if (Input.GetMouseButtonUp(0) && equippedGun == Gun.GunDictionary["Laser"])
+            {
+                DisableLaser();
+            }
         }
 
-        //Si laser est equip
-        if (Input.GetMouseButton(0) && equippedGun == Gun.GunDictionary["Laser"])
-        {
-            UpdateLaser();
-        }
-
-        //Si MachineGun est equip et on tir
-        if(Input.GetMouseButtonDown(0) && equippedGun == Gun.GunDictionary["MachineGun"])
-        {
-            StartCoroutine(MachineGunShooting());
-        }
         //Si le trigger de l'arme est lache arrete le tir
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && equippedGun == Gun.GunDictionary["MachineGun"])
         {
             StopAllCoroutines();
         }
 
-        //Permet de fermer le laser
-        if (Input.GetMouseButtonUp(0) && equippedGun == Gun.GunDictionary["Laser"])
+        //Reload
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            DisableLaser();
+            StartCoroutine(Reload());
         }
     }
 
@@ -79,29 +98,42 @@ public class GunManager : MonoBehaviour
     //MachineGun
     public IEnumerator MachineGunShooting()
     {
-        //tir selon le nb de balle dans le mag
-        for (int i = 0; i < equippedGun.BulletMag; i++)
-        { 
-           Rigidbody bullet;
-           bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
-           bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
-           yield return new WaitForSeconds(equippedGun.BulletTimer);
-        }  
+            //tir selon le nb de balle dans le mag
+            for (int i = 0; i < equippedGun.MaxBulletMag; i++)
+            {
+                equippedGun.CurrentBulletMag--;
+                Rigidbody bullet;
+                bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
+                bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
+                bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+                yield return new WaitForSeconds(equippedGun.BulletTimer);
+
+                if(equippedGun.CurrentBulletMag <= 0)
+                {
+                    break;
+                }
+            }
+        
     }
 
     //Armes et laser
     public IEnumerator BulletDelay()
     {
-        //Check si arme a des balles
+        //Check si arme utilise des balles
         if (equippedGun.HasBullet)
         {
-            //tire selon le FireRate du Gun
-            for (int i = 0; i < equippedGun.FireRate; i++)
+            if(equippedGun.CurrentBulletMag > 0)
             {
-                Rigidbody bullet;
-                bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
-                bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
-                yield return StartCoroutine(BulletTimer());
+                //tire selon le FireRate du Gun
+                for (int i = 0; i < equippedGun.FireRate; i++)
+                {
+                    equippedGun.CurrentBulletMag--;
+                    Rigidbody bullet;
+                    bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
+                    bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
+                    bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+                    yield return StartCoroutine(BulletTimer());
+                }
             }
         }
         else //active le laser
@@ -158,5 +190,16 @@ public class GunManager : MonoBehaviour
         {
             lineRenderer.SetPosition(1, new Vector3(0, 0.75f, 150f));
         }
+    }
+
+    //ReloadGun
+    private IEnumerator Reload()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(equippedGun.ReloadTimer);
+        equippedGun.CurrentBulletMag = equippedGun.MaxBulletMag;
+        bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+        isReloading = false;
+
     }
 }

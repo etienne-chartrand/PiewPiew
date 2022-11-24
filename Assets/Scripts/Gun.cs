@@ -14,7 +14,11 @@ public class Gun
 
     public bool HasBullet { get; set; }
 
-    public int BulletMag { get; set; }
+    public int MaxBulletMag { get; set; }
+
+    public int CurrentBulletMag { get; set; }
+
+    public float ReloadTimer { get; set; }
 
     public Gun()
     {
@@ -23,27 +27,31 @@ public class Gun
         this.BulletSpeed = 0;
         this.BulletSpeed = 0;
         this.HasBullet = true;
-        this.BulletMag = 0;
+        this.MaxBulletMag = 0;
+        this.CurrentBulletMag = 0;
+        this.ReloadTimer = 0;
     }
 
-    public Gun(string gunName, int fireRate, int bulletSpeed, float bulletTimer, bool hasBullet, int bulletMag)
+    public Gun(string gunName, int fireRate, int bulletSpeed, float bulletTimer, bool hasBullet, int maxBulletMag, int currentBulletMag, float reloadTimer)
     {
         GunName = gunName;
         FireRate = fireRate;
         BulletSpeed = bulletSpeed;
         BulletTimer = bulletTimer;
         HasBullet = hasBullet;
-        BulletMag = bulletMag;
+        MaxBulletMag = maxBulletMag;
+        CurrentBulletMag = currentBulletMag;
+        ReloadTimer = reloadTimer;
     }
 
     public static Dictionary<string, Gun> GunDictionary = new Dictionary<string, Gun>()
     {
-        //Identifier                 Name         FireRate  BulletSpeed     BulletTimer    HasBullet      bulletMag
-        {"Pistol", new Gun(        "Pistol",         1,     100,               0,            true,           12)},
-        {"Famas", new Gun(         "Famas",          3,     200,              0.1f,          true,           30)},
-        {"ShotGun", new Gun(       "ShotGun",        5,     50,                0,            true,            6)},
-        {"MachineGun", new Gun(    "MachineGun",     1,     200,               0.05f,         true,           200)},
-        {"Laser", new Gun(         "Laser",          0,     0,                 0,            false,           0)}
+        //Identifier                 Name         FireRate  BulletSpeed     BulletTimer    HasBullet      maxBulletMag    CurrentBulletMag      ReloadTimer
+        {"Pistol", new Gun(        "Pistol",         1,     100,               0,            true,           12,               12,                 1f)},
+        {"Famas", new Gun(         "Famas",          3,     200,              0.05f,          true,           30,               30,                 1.4f)},
+        {"ShotGun", new Gun(       "ShotGun",        6,     50,                0,            true,            36,                36,                 1.5f)},
+        {"MachineGun", new Gun(    "MachineGun",     1,     200,               0.03f,         true,           200,             200,                2.7f)},
+        {"Laser", new Gun(         "Laser",          0,     0,                 0,            false,           0,                0,                 0)}
     };
 
     

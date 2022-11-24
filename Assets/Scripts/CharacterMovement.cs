@@ -28,8 +28,6 @@ public class CharacterMovement : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
-
-
     void Start()
     {
         canTakeDamage = true;
