@@ -14,7 +14,7 @@ public class Gun
 
     public bool HasBullet { get; set; }
 
-    public int bulletMag { get; set; }
+    public int BulletMag { get; set; }
 
     public Gun()
     {
@@ -23,7 +23,7 @@ public class Gun
         this.BulletSpeed = 0;
         this.BulletSpeed = 0;
         this.HasBullet = true;
-        this.bulletMag = 0;
+        this.BulletMag = 0;
     }
 
     public Gun(string gunName, int fireRate, int bulletSpeed, float bulletTimer, bool hasBullet, int bulletMag)
@@ -33,6 +33,7 @@ public class Gun
         BulletSpeed = bulletSpeed;
         BulletTimer = bulletTimer;
         HasBullet = hasBullet;
+        BulletMag = bulletMag;
     }
 
     public static Dictionary<string, Gun> GunDictionary = new Dictionary<string, Gun>()
@@ -41,7 +42,7 @@ public class Gun
         {"Pistol", new Gun(        "Pistol",         1,     100,               0,            true,           12)},
         {"Famas", new Gun(         "Famas",          3,     200,              0.1f,          true,           30)},
         {"ShotGun", new Gun(       "ShotGun",        5,     50,                0,            true,            6)},
-        {"MachineGun", new Gun(    "MachineGun",     1,     200,               0.1f,         true,           200)},
+        {"MachineGun", new Gun(    "MachineGun",     1,     200,               0.05f,         true,           200)},
         {"Laser", new Gun(         "Laser",          0,     0,                 0,            false,           0)}
     };
 
