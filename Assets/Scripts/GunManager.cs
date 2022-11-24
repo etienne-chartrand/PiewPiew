@@ -110,7 +110,7 @@ public class GunManager : MonoBehaviour
         }
     }
 
-    //Timer qui attend pour que la prochian ne touche pas a celle qui vient detre tirer
+    //Timer qui attend pour que la prochain ne touche pas a celle qui vient detre tirer
     public IEnumerator BulletTimer()
     {
         float timer = equippedGun.BulletTimer;
@@ -142,9 +142,16 @@ public class GunManager : MonoBehaviour
         //Reduit le laser si on hit un objet
         if (Physics.Raycast(transform.position, transform.forward, out hit, 15.3f))
         {
-            hit.point = transform.InverseTransformPoint(hit.point);
-
-            lineRenderer.SetPosition(1, hit.point);
+            if (hit.collider.tag == "Enemy")
+            {
+                Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                enemy.TakeDamage(.15f);
+            }
+            else
+            {
+                hit.point = transform.InverseTransformPoint(hit.point);
+                lineRenderer.SetPosition(1, hit.point);
+            }
             
         }
         else //Reset le laser si rien n'est toucher

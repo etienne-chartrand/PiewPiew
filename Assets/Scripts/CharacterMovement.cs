@@ -20,6 +20,13 @@ public class CharacterMovement : MonoBehaviour
 
     public bool jeuFini;
 
+    //Dash
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 24f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+
     void Start()
     {
         jeuFini = false;
@@ -35,6 +42,11 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             TakeDamage(20);
@@ -44,6 +56,12 @@ public class CharacterMovement : MonoBehaviour
         // We only get the input of x and z, y is left at 0 as it's not required
         // 'Normalized' diagonals to prevent faster movement when two inputs are used together
         movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     public void TakeDamage(int damage)
@@ -57,8 +75,12 @@ public class CharacterMovement : MonoBehaviour
     // 'FixedUpdate' Method is used for Physics movements
     void FixedUpdate()
     {
-        moveCharacter(movement); // We call the function 'moveCharacter' in FixedUpdate for Physics movement
+        if (isDashing)
+        {
+            return;
+        }
 
+        moveCharacter(movement); // We call the function 'moveCharacter' in FixedUpdate for Physics movement
 
         //Player rotate selon l'endroit de la souris
         Ray cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
@@ -83,6 +105,18 @@ public class CharacterMovement : MonoBehaviour
         rb.velocity = direction * speed * Time.fixedDeltaTime;
     }
 
+    //Dash
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        rb.velocity = new Vector3(movement.x * dashingPower, 0, movement.z * dashingPower);
+        yield return new WaitForSeconds(dashingTime);
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "fin")
@@ -90,7 +124,4 @@ public class CharacterMovement : MonoBehaviour
             jeuFini = true;
         }
     }
-
-    
-    
 }
