@@ -8,6 +8,7 @@ public class CharacterMovement : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
+    private bool canTakeDamage;
 
 
     // Add the variables
@@ -23,12 +24,15 @@ public class CharacterMovement : MonoBehaviour
     //Dash
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 24f;
+    private float dashingPower = 32f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
+
+
     void Start()
     {
+        canTakeDamage = true;
         jeuFini = false;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -64,10 +68,14 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    //Player prends du damage
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        if (canTakeDamage)
+        {
+            currentHealth -= damage;
+            healthBar.SetHealth(currentHealth);
+        }
     }
 
 
@@ -109,10 +117,12 @@ public class CharacterMovement : MonoBehaviour
     private IEnumerator Dash()
     {
         canDash = false;
+        canTakeDamage = false;
         isDashing = true;
         rb.velocity = new Vector3(movement.x * dashingPower, 0, movement.z * dashingPower);
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
+        canTakeDamage = true;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
