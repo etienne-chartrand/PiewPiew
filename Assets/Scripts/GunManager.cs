@@ -15,12 +15,18 @@ public class GunManager : MonoBehaviour
 
     private bool isReloading = false;
 
+    private void Awake()
+    {
+        gunPoint = this.gameObject;
+        equippedGun = Gun.GunDictionary["Pistol"];
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        equippedGun = Gun.GunDictionary["Pistol"];
+        mainCam = Camera.main;
         bulletCount.SetBulletCount(equippedGun.MaxBulletMag);
-        lineRenderer = GetComponentInChildren<LineRenderer>();
+        lineRenderer = GetComponent<LineRenderer>();
         DisableLaser();
     }
 
@@ -170,7 +176,6 @@ public class GunManager : MonoBehaviour
     void UpdateLaser()
     {
         RaycastHit hit;
-
         //Reduit le laser si on hit un objet
         if (Physics.Raycast(transform.position, transform.forward, out hit, 15.3f))
         {
@@ -189,6 +194,7 @@ public class GunManager : MonoBehaviour
         else //Reset le laser si rien n'est toucher
         {
             lineRenderer.SetPosition(1, new Vector3(0, 0.75f, 150f));
+            Debug.Log("nothing");
         }
     }
 

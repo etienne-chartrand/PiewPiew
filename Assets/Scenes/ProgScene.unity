@@ -2515,7 +2515,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 74.9651}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &830566228
@@ -3359,7 +3359,6 @@ GameObject:
   - component: {fileID: 1167597856}
   - component: {fileID: 1167597855}
   - component: {fileID: 1167597854}
-  - component: {fileID: 1167597859}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3454,23 +3453,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1167597859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167597853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18bfc45a3957e2e4ebb53dbfc3ee9aca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6112559373709804631, guid: b3dc67fb70272ac4f9f29ccdc5a2d5f1, type: 3}
-  gunPoint: {fileID: 1332065015}
-  bulletCount: {fileID: 830566230}
-  mainCam: {fileID: 1734293165}
-  lineRenderer: {fileID: 0}
 --- !u!1 &1206951669
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,6 +3624,7 @@ GameObject:
   - component: {fileID: 1332065016}
   - component: {fileID: 1332065020}
   - component: {fileID: 1332065019}
+  - component: {fileID: 1332065022}
   - component: {fileID: 1332065017}
   m_Layer: 0
   m_Name: GunPoint
@@ -3814,6 +3797,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332065015}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1332065022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332065015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18bfc45a3957e2e4ebb53dbfc3ee9aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 6112559373709804631, guid: b3dc67fb70272ac4f9f29ccdc5a2d5f1, type: 3}
+  gunPoint: {fileID: 0}
+  bulletCount: {fileID: 830566230}
+  mainCam: {fileID: 0}
+  lineRenderer: {fileID: 0}
 --- !u!1 &1400526249
 GameObject:
   m_ObjectHideFlags: 0
