@@ -30,9 +30,9 @@ public class Potion
 
     public static Dictionary<string, Potion> PotionDictionary = new Dictionary<string, Potion>()
     {
-                                 //Name
-        {"Health", new Potion(  "Health", 3f, true, 3) }
-
-
+                                            //Name        TimeEffect         IsAreaOfEffect              Stack
+        {"Heal", new Potion(                "Heal",         3f,                true,                      3)},
+        {"Speed", new Potion(              "Speed",          2f,                false,                    3)},
+        {"InfinityAmmo", new Potion(    "InfinityAmmo",      5f,                true,                     2)}
     };
 }
