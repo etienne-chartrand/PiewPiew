@@ -12,6 +12,7 @@ public class GunManager : MonoBehaviour
     public LineRenderer lineRenderer;
 
     public Gun equippedGun;
+    public UIManager uiManager;
 
     private bool isReloading = false;
 
@@ -37,27 +38,32 @@ public class GunManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             equippedGun = Gun.GunDictionary["Pistol"];
-            bulletCount.SetBulletCount(equippedGun.CurrentBulletMag); 
+            bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+            uiManager.SelectGun(1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             equippedGun = Gun.GunDictionary["Famas"];
             bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+            uiManager.SelectGun(2);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             equippedGun = Gun.GunDictionary["ShotGun"];
             bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+            uiManager.SelectGun(3);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             equippedGun = Gun.GunDictionary["MachineGun"];
             bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+            uiManager.SelectGun(4);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             equippedGun = Gun.GunDictionary["Laser"];
             bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+            uiManager.SelectGun(5);
         }
 
         if (!isReloading)

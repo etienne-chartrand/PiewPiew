@@ -12,12 +12,19 @@ public class UIManager : MonoBehaviour
 
     public GameObject winScreen;
 
+    public GameObject gunSelection;
+    public static int selectedGun;
+
+    public Color selected;
+    public Color unSelected;
+
     // Start is called before the first frame update
     void Start()
     {
         gameOverScreen.SetActive(false);
 
         winScreen.SetActive(false);
+        SelectGun(1);
     }
 
     // Update is called once per frame
@@ -25,7 +32,7 @@ public class UIManager : MonoBehaviour
     {
         if (characterMovement.currentHealth <=0)
         {
-            characterMovement.enabled=false;
+            characterMovement.enabled = false;
 
             gameOverScreen.SetActive(true);
         }
@@ -40,5 +47,20 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene("PiewPiew");
     }
-    
+
+    //Selectionne le bon gun dans le ui
+    public void SelectGun(int gunSelected)
+    {
+        for(int i = 0; i < gunSelection.transform.childCount; i++)
+        {
+            if(i == gunSelected - 1)
+            {
+                gunSelection.transform.GetChild(i).GetComponent<Image>().color = selected;
+            }
+            else
+            {
+                gunSelection.transform.GetChild(i).GetComponent<Image>().color = unSelected;
+            }
+        }
+    }
 }
