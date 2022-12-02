@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PotionType : MonoBehaviour
 {
-    
+    //Script sur les potions
+    //Permet de récupérer les potions
+
     public string potionName;
     private PotionManager manager;
     private GameObject gameObjectManager;
