@@ -17,33 +17,51 @@ public class PotionManager : MonoBehaviour
     public int infinityAmmoPotion;
 
 
-    private void Awake()
-    {
-        if(type == PotionType.heal)
-        {
-            equippedPotion = Potion.PotionDictionary["Heal"];
-        }
-        else if(type == PotionType.speed)
-        {
-            equippedPotion = Potion.PotionDictionary["Speed"];
-        }
-        else if(type == PotionType.infinityAmmo)
-        {
-            equippedPotion = Potion.PotionDictionary["InfinityAmmo"];
-        }
-    }
-
     public bool CanITakePotion(string potionName)
     {
-        if (Potion.PotionDictionary[potionName].PotionStack == healPotion)
+        equippedPotion = Potion.PotionDictionary[potionName];
+
+        if(equippedPotion.PotionName == "Heal")
         {
-            return false;
+            if(equippedPotion.PotionStack > healPotion)
+            {
+                healPotion++;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if(equippedPotion.PotionName == "Speed")
+        {
+            if (equippedPotion.PotionStack > speedPotion)
+            {
+                speedPotion++;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        else if (equippedPotion.PotionName == "InfinityAmmo")
+        {
+            if (equippedPotion.PotionStack > infinityAmmoPotion)
+            {
+                infinityAmmoPotion++;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
         else
         {
-            healPotion++;
-            return true;
+            return false;
         }
-        
     }
 }

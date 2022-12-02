@@ -6,7 +6,14 @@ public class PotionType : MonoBehaviour
 {
     
     public string potionName;
-    public PotionManager manager;
+    private PotionManager manager;
+    private GameObject gameObjectManager;
+
+    private void Awake()
+    {
+        gameObjectManager = GameObject.Find("PotionManager");
+        manager = gameObjectManager.GetComponent<PotionManager>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
