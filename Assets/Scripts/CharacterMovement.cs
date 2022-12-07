@@ -112,7 +112,6 @@ public class CharacterMovement : MonoBehaviour
 
     private IEnumerator Healing(int heal, float time)
     {
-        Debug.Log("yo");
         if (currentHealth < maxHealth)
         {
             WaitForSeconds wfs = new WaitForSeconds(1);
@@ -121,7 +120,6 @@ public class CharacterMovement : MonoBehaviour
             {
                 currentHealth += heal;
                 healthBar.SetHealth(currentHealth);
-                Debug.Log("qwdqdq");
                 yield return wfs;
             }
         }
@@ -140,9 +138,6 @@ public class CharacterMovement : MonoBehaviour
         yield return wfs;
         playerSpeed = speed;
     }
-
-    
-
 
 
     // 'FixedUpdate' Method is used for Physics movements
