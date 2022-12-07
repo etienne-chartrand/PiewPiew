@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class EnemyChecker : MonoBehaviour
 {
+    private EnemyBehaviour enemyBehaviour;
+
+    private void Start()
+    {
+        enemyBehaviour = GetComponentInParent<EnemyBehaviour>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            Debug.Log("in");
+            enemyBehaviour.isClose = true;
         }
     }
 
@@ -16,7 +22,7 @@ public class EnemyChecker : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("out");
+            enemyBehaviour.isClose = false;
         }
     }
 }

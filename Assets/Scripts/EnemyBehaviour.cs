@@ -6,8 +6,9 @@ using UnityEngine.AI;
 public class EnemyBehaviour : MonoBehaviour
 {
     private NavMeshAgent enemy;
+    public NavMeshPath path;
     public Transform playerTarget;
-    private bool isClose;
+    public bool isClose;
 
     //HealthSystem
     public int maxHealth = 3;
@@ -21,13 +22,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Update()
     {
-
         if (isClose)
         {
             enemy.SetDestination(playerTarget.position);
         }
 
-        enemy.SetDestination(playerTarget.position);
+        enemy.SetPath(path);
 
     }
 
