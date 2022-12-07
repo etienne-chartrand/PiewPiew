@@ -23,17 +23,18 @@ public class PotionManager : MonoBehaviour
     public PotionType type;
 
     public Potion equippedPotion;
-    public int healPotion;
-    public int speedPotion;
-    public int infinityAmmoPotion;
+    private int healPotion;
+    private int speedPotion;
+    private int infinityAmmoPotion;
 
-
+    //Check si le joueur peut prendre la potion/si inventory is full
     public bool CanITakePotion(string potionName)
     {
         equippedPotion = Potion.PotionDictionary[potionName];
 
         if(equippedPotion.PotionName == "Heal")
         {
+            //Si peut ajoute au counter
             if(equippedPotion.PotionStack > healPotion)
             {
                 healPotion++;
@@ -47,6 +48,7 @@ public class PotionManager : MonoBehaviour
         }
         else if(equippedPotion.PotionName == "Speed")
         {
+            //Si peut ajoute au counter
             if (equippedPotion.PotionStack > speedPotion)
             {
                 speedPotion++;
@@ -61,6 +63,7 @@ public class PotionManager : MonoBehaviour
         }
         else if (equippedPotion.PotionName == "InfinityAmmo")
         {
+            //Si peut ajoute au counter
             if (equippedPotion.PotionStack > infinityAmmoPotion)
             {
                 infinityAmmoPotion++;
@@ -79,11 +82,13 @@ public class PotionManager : MonoBehaviour
         }
     }
 
+    //Check si on peut consume la potion
     public void ConsumePotion(PotionType potion)
     {
         string potionName = potion.ToString();
         equippedPotion = Potion.PotionDictionary[potionName];
 
+        //Descend le counter
         if (potion == PotionType.Heal && healPotion > 0)
         {
             healPotion--;
@@ -92,18 +97,21 @@ public class PotionManager : MonoBehaviour
         }
         else if(potion == PotionType.Speed && speedPotion > 0)
         {
+            //Descend le counter
             speedPotion--;
             speedCount.text = speedPotion.ToString();
             player.SpeedPotionEffect(equippedPotion.PotionTimeEffect);
         }
         else if(potion == PotionType.InfinityAmmo && infinityAmmoPotion > 0)
         {
+            //Descend le counter
             infinityAmmoPotion--;
             infinityAmmoCount.text = infinityAmmoPotion.ToString();
             Instantiate(infinityAmmoZone, new Vector3(player.transform.position.x, 0, player.transform.position.z), Quaternion.identity);
         }
         else
         {
+            //Aucune potion dans l'inventaire alors on envoie un feedback au joueur
             Debug.Log("No potion in inventory");
         }
     }

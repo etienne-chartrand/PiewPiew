@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealZone : MonoBehaviour
 {
+    //Zone de heal
     private GameObject player;
     private CharacterMovement playerCM;
     private PotionManager potionManager;
@@ -18,25 +19,26 @@ public class HealZone : MonoBehaviour
         potionManager = PotionManager.GetComponent<PotionManager>();
     }
 
+    //Detruit l'objet apres la creation selon la duree
     private void Start()
     {
         Destroy(gameObject, potionManager.equippedPotion.PotionTimeEffect);
     }
 
+    //Si joueur est in on heal
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            Debug.Log("in");
             playerCM.HealPlayer(5, potionManager.equippedPotion.PotionTimeEffect);
         }
     }
 
+    //Si out on arrete le heal
     private void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player")
-        {
-            Debug.Log("out");
+        {     
             playerCM.StopHealing();
         }
     }

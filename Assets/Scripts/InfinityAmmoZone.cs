@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InfinityAmmoZone : MonoBehaviour
 {
+    //Zone pour le infinity Ammo
     private GameObject player;
     private CharacterMovement playerCM;
     private PotionManager potionManager;
@@ -20,11 +21,13 @@ public class InfinityAmmoZone : MonoBehaviour
         gunManager = player.GetComponentInChildren<GunManager>();
     }
 
+    //Au start envoie la coroutine pour la destruction
     private void Start()
     {
-        Destroy(gameObject, potionManager.equippedPotion.PotionTimeEffect);
+        StartCoroutine(DestroyZone(potionManager.equippedPotion.PotionTimeEffect));
     }
 
+    //Si in on set infinity ammo
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -33,11 +36,21 @@ public class InfinityAmmoZone : MonoBehaviour
         }
     }
 
+    //Si out on cancel infiny ammo 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
             gunManager.infinityAmmoEffect = false;
         }
+    }
+
+    //Lorsque la coroutine est appele on start le timer pour detruire la zone et reset le infinity ammo
+    private IEnumerator DestroyZone(float time)
+    {
+        WaitForSeconds wfs = new WaitForSeconds(time);
+        yield return wfs;
+        Destroy(gameObject);
+        gunManager.infinityAmmoEffect = false;
     }
 }
