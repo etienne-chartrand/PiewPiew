@@ -72,7 +72,7 @@ public class GunManager : MonoBehaviour
         if (!isReloading)
         {
             //Permet de tirer
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && equippedGun != Gun.GunDictionary["MachineGun"])
             {
                 StartCoroutine(BulletDelay());
             }
@@ -113,7 +113,10 @@ public class GunManager : MonoBehaviour
     //MachineGun
     public IEnumerator MachineGunShooting()
     {
-            //tir selon le nb de balle dans le mag
+        WaitForSeconds wfs = new WaitForSeconds(1f);
+        yield return wfs;
+
+        //tir selon le nb de balle dans le mag
         for (int i = 0; i < equippedGun.MaxBulletMag; i++)
         {
             if (!infinityAmmoEffect)
@@ -131,8 +134,7 @@ public class GunManager : MonoBehaviour
             {
                 break;
             }
-        }
-        
+        } 
     }
 
     //Armes et laser
@@ -197,7 +199,7 @@ public class GunManager : MonoBehaviour
         {
             if (hit.collider.tag == "Enemy")
             {
-                Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                EnemyBehaviour enemy = hit.collider.gameObject.GetComponent<EnemyBehaviour>();
                 enemy.TakeDamage(.15f);
             }
             else

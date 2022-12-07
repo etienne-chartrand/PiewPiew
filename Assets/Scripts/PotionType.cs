@@ -17,6 +17,7 @@ public class PotionType : MonoBehaviour
         manager = gameObjectManager.GetComponent<PotionManager>();
     }
 
+    //Check si le joueur peut prendre la potion, si oui on detruit la potion
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
