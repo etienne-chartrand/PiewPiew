@@ -217,6 +217,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1167597854}
   healZone: {fileID: 4740334092917691322, guid: aa611ee5ae261ae41aaab7cf2335b11e, type: 3}
+  infinityAmmoZone: {fileID: 4740334092917691322, guid: 974516e227bf26f41a3049091f3fdc22, type: 3}
+  healCount: {fileID: 2032480872}
+  speedCount: {fileID: 2086175280}
+  infinityAmmoCount: {fileID: 1745714385}
   type: 0
   healPotion: 0
   speedPotion: 0
@@ -4568,6 +4572,7 @@ MonoBehaviour:
   mainCam: {fileID: 0}
   lineRenderer: {fileID: 0}
   uiManager: {fileID: 485788699}
+  infinityAmmoEffect: 0
 --- !u!1001 &1395259489
 PrefabInstance:
   m_ObjectHideFlags: 0
