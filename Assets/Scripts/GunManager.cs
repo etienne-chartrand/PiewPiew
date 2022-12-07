@@ -199,7 +199,7 @@ public class GunManager : MonoBehaviour
         {
             if (hit.collider.tag == "Enemy")
             {
-                Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                EnemyBehaviour enemy = hit.collider.gameObject.GetComponent<EnemyBehaviour>();
                 enemy.TakeDamage(.15f);
             }
             else

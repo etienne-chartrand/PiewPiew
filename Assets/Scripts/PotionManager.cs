@@ -74,7 +74,6 @@ public class PotionManager : MonoBehaviour
             {
                 return false;
             }
-
         }
         else
         {
