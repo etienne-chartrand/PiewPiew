@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PotionManager : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class PotionManager : MonoBehaviour
 
     public CharacterMovement player;
     public GameObject healZone;
+    public GameObject infinityAmmoZone;
+    public TMP_Text healCount;
+    public TMP_Text speedCount;
+    public TMP_Text infinityAmmoCount;
     
     public enum PotionType{
         Heal,
@@ -32,6 +37,7 @@ public class PotionManager : MonoBehaviour
             if(equippedPotion.PotionStack > healPotion)
             {
                 healPotion++;
+                healCount.text = healPotion.ToString();
                 return true;
             }
             else
@@ -44,6 +50,7 @@ public class PotionManager : MonoBehaviour
             if (equippedPotion.PotionStack > speedPotion)
             {
                 speedPotion++;
+                speedCount.text = speedPotion.ToString();
                 return true;
             }
             else
@@ -57,6 +64,7 @@ public class PotionManager : MonoBehaviour
             if (equippedPotion.PotionStack > infinityAmmoPotion)
             {
                 infinityAmmoPotion++;
+                infinityAmmoCount.text = infinityAmmoPotion.ToString();
                 return true;
             }
             else
@@ -79,16 +87,20 @@ public class PotionManager : MonoBehaviour
         if (potion == PotionType.Heal && healPotion > 0)
         {
             healPotion--;
+            healCount.text = healPotion.ToString();
             Instantiate(healZone, new Vector3(player.transform.position.x, 0, player.transform.position.z), Quaternion.identity);
         }
         else if(potion == PotionType.Speed && speedPotion > 0)
         {
             speedPotion--;
+            speedCount.text = speedPotion.ToString();
             player.SpeedPotionEffect(equippedPotion.PotionTimeEffect);
         }
         else if(potion == PotionType.InfinityAmmo && infinityAmmoPotion > 0)
         {
-
+            infinityAmmoPotion--;
+            infinityAmmoCount.text = infinityAmmoPotion.ToString();
+            Instantiate(infinityAmmoZone, new Vector3(player.transform.position.x, 0, player.transform.position.z), Quaternion.identity);
         }
         else
         {

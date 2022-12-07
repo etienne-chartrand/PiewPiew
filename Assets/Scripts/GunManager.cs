@@ -14,6 +14,8 @@ public class GunManager : MonoBehaviour
     public Gun equippedGun;
     public UIManager uiManager;
 
+
+    public bool infinityAmmoEffect;
     private bool isReloading = false;
 
     private void Awake()
@@ -25,6 +27,7 @@ public class GunManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        infinityAmmoEffect = false;
         mainCam = Camera.main;
         bulletCount.SetBulletCount(equippedGun.MaxBulletMag);
         lineRenderer = GetComponent<LineRenderer>();
@@ -111,20 +114,24 @@ public class GunManager : MonoBehaviour
     public IEnumerator MachineGunShooting()
     {
             //tir selon le nb de balle dans le mag
-            for (int i = 0; i < equippedGun.MaxBulletMag; i++)
+        for (int i = 0; i < equippedGun.MaxBulletMag; i++)
+        {
+            if (!infinityAmmoEffect)
             {
                 equippedGun.CurrentBulletMag--;
-                Rigidbody bullet;
-                bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
-                bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
-                bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
-                yield return new WaitForSeconds(equippedGun.BulletTimer);
-
-                if(equippedGun.CurrentBulletMag <= 0)
-                {
-                    break;
-                }
             }
+            
+            Rigidbody bullet;
+            bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
+            bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
+            bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+            yield return new WaitForSeconds(equippedGun.BulletTimer);
+
+            if(equippedGun.CurrentBulletMag <= 0)
+            {
+                break;
+            }
+        }
         
     }
 
@@ -139,7 +146,10 @@ public class GunManager : MonoBehaviour
                 //tire selon le FireRate du Gun
                 for (int i = 0; i < equippedGun.FireRate; i++)
                 {
-                    equippedGun.CurrentBulletMag--;
+                    if (!infinityAmmoEffect)
+                    {
+                        equippedGun.CurrentBulletMag--;
+                    }
                     Rigidbody bullet;
                     bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
                     bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
