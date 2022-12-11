@@ -23,9 +23,9 @@ public class PotionManager : MonoBehaviour
     public PotionType type;
 
     public Potion equippedPotion;
-    private int healPotion;
-    private int speedPotion;
-    private int infinityAmmoPotion;
+    private int healPotionCount;
+    private int speedPotionCount;
+    private int infinityAmmoPotionCount;
 
     //Check si le joueur peut prendre la potion/si inventory is full
     public bool CanITakePotion(string potionName)
@@ -35,10 +35,10 @@ public class PotionManager : MonoBehaviour
         if(equippedPotion.PotionName == "Heal")
         {
             //Si peut ajoute au counter
-            if(equippedPotion.PotionStack > healPotion)
+            if(equippedPotion.PotionStack > healPotionCount)
             {
-                healPotion++;
-                healCount.text = healPotion.ToString();
+                healPotionCount++;
+                healCount.text = healPotionCount.ToString();
                 return true;
             }
             else
@@ -49,10 +49,10 @@ public class PotionManager : MonoBehaviour
         else if(equippedPotion.PotionName == "Speed")
         {
             //Si peut ajoute au counter
-            if (equippedPotion.PotionStack > speedPotion)
+            if (equippedPotion.PotionStack > speedPotionCount)
             {
-                speedPotion++;
-                speedCount.text = speedPotion.ToString();
+                speedPotionCount++;
+                speedCount.text = speedPotionCount.ToString();
                 return true;
             }
             else
@@ -64,10 +64,10 @@ public class PotionManager : MonoBehaviour
         else if (equippedPotion.PotionName == "InfinityAmmo")
         {
             //Si peut ajoute au counter
-            if (equippedPotion.PotionStack > infinityAmmoPotion)
+            if (equippedPotion.PotionStack > infinityAmmoPotionCount)
             {
-                infinityAmmoPotion++;
-                infinityAmmoCount.text = infinityAmmoPotion.ToString();
+                infinityAmmoPotionCount++;
+                infinityAmmoCount.text = infinityAmmoPotionCount.ToString();
                 return true;
             }
             else
@@ -88,24 +88,24 @@ public class PotionManager : MonoBehaviour
         equippedPotion = Potion.PotionDictionary[potionName];
 
         //Descend le counter
-        if (potion == PotionType.Heal && healPotion > 0)
+        if (potion == PotionType.Heal && healPotionCount > 0)
         {
-            healPotion--;
-            healCount.text = healPotion.ToString();
+            healPotionCount--;
+            healCount.text = healPotionCount.ToString();
             Instantiate(healZone, new Vector3(player.transform.position.x, 0, player.transform.position.z), Quaternion.identity);
         }
-        else if(potion == PotionType.Speed && speedPotion > 0)
+        else if(potion == PotionType.Speed && speedPotionCount > 0)
         {
             //Descend le counter
-            speedPotion--;
-            speedCount.text = speedPotion.ToString();
+            speedPotionCount--;
+            speedCount.text = speedPotionCount.ToString();
             player.SpeedPotionEffect(equippedPotion.PotionTimeEffect);
         }
-        else if(potion == PotionType.InfinityAmmo && infinityAmmoPotion > 0)
+        else if(potion == PotionType.InfinityAmmo && infinityAmmoPotionCount > 0)
         {
             //Descend le counter
-            infinityAmmoPotion--;
-            infinityAmmoCount.text = infinityAmmoPotion.ToString();
+            infinityAmmoPotionCount--;
+            infinityAmmoCount.text = infinityAmmoPotionCount.ToString();
             Instantiate(infinityAmmoZone, new Vector3(player.transform.position.x, 0, player.transform.position.z), Quaternion.identity);
         }
         else

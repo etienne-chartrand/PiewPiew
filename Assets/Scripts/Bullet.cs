@@ -10,13 +10,19 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 5f);
     }
 
-    //Hit un enemy ajoute du degat
+    //Hit ajoute du degat
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Enemy")
         {
             EnemyBehaviour enemy = collision.gameObject.GetComponent<EnemyBehaviour>();
             enemy.TakeDamage(20);
+        }
+        
+        if(collision.gameObject.tag == "Player")
+        {
+            CharacterMovement player = collision.gameObject.GetComponent<CharacterMovement>();
+            player.TakeDamage(20);
         }
     }
 }

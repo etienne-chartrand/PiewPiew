@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 773616260113333356}
   - component: {fileID: 773616260113333357}
   m_Layer: 0
-  m_Name: Stabber
+  m_Name: Shooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd23ab166eb81b418c1df2b558906fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Stabber
+  enemyName: Shooter
   points:
   - {fileID: 0}
   - {fileID: 0}
