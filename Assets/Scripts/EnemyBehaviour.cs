@@ -14,6 +14,7 @@ public class EnemyBehaviour : MonoBehaviour
     public bool isClose;
     public Rigidbody bulletPrefab;
     public GameObject enemyGunPoint;
+    public GameObject pointsPrefab;
 
     public Gun equippedGun;
     public bool canShoot = true;
@@ -26,6 +27,15 @@ public class EnemyBehaviour : MonoBehaviour
     {
         equippedGun = Enemy.EnemyDictionary[enemyName].EnemyGun;
         maxHealth = Enemy.EnemyDictionary[enemyName].EnemyHealth;
+
+
+        //Genere des points pour créer la patrouille du AI
+        for (int i = 0; i < points.Length; i++)
+        {
+            Vector3 randomSpawnPos = new Vector3(Random.Range(-8, 9), 0.5f, Random.Range(-8, 9));
+            var newPoints = Instantiate(pointsPrefab, transform.position + randomSpawnPos, Quaternion.identity);
+            points[i] = newPoints.transform;
+        }
     }
 
     private void Start()

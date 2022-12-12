@@ -18,6 +18,8 @@ public class GunManager : MonoBehaviour
     public bool infinityAmmoEffect;
     private bool isReloading = false;
 
+    public LayerMask layerMask;
+
     private void Awake()
     {
         gunPoint = this.gameObject;
@@ -195,8 +197,9 @@ public class GunManager : MonoBehaviour
     {
         RaycastHit hit;
         //Reduit le laser si on hit un objet
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 15.3f))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 15.3f, layerMask ,QueryTriggerInteraction.Ignore))
         {
+            Debug.Log("yo");
             if (hit.collider.tag == "Enemy")
             {
                 EnemyBehaviour enemy = hit.collider.gameObject.GetComponent<EnemyBehaviour>();
@@ -212,7 +215,6 @@ public class GunManager : MonoBehaviour
         else //Reset le laser si rien n'est toucher
         {
             lineRenderer.SetPosition(1, new Vector3(0, 0.75f, 150f));
-            Debug.Log("nothing");
         }
     }
 

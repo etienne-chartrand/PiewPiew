@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773616260113333266}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 27.85, y: 0.5, z: 0.42}
   m_LocalScale: {x: 0.91, y: 0.91, z: 0.91}
   m_ConstrainProportionsScale: 1
@@ -146,6 +146,7 @@ MonoBehaviour:
   isClose: 0
   bulletPrefab: {fileID: 6112559373709804631, guid: b3dc67fb70272ac4f9f29ccdc5a2d5f1, type: 3}
   enemyGunPoint: {fileID: 773616260331478246}
+  pointsPrefab: {fileID: 6309202909177617449, guid: 4c57ad5353771ea44a0ac71e0f321fb6, type: 3}
   canShoot: 1
   maxHealth: 3
   currentHealth: 0

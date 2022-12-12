@@ -111,7 +111,7 @@ public class PotionManager : MonoBehaviour
         else
         {
             //Aucune potion dans l'inventaire alors on envoie un feedback au joueur
-            Debug.Log("No potion in inventory");
+            
         }
     }
 }
