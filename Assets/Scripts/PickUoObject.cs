@@ -18,6 +18,7 @@ public class PickUoObject : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<PickUp>().isPickedUp)
         {
+
             transform.position = putPlayerHere.position + offset;
             
         }
@@ -26,6 +27,4 @@ public class PickUoObject : MonoBehaviour
             transform.position = transform.position;
         }
     }
-
-     
 }

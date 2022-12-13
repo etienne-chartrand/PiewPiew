@@ -15,12 +15,13 @@ public class EnemyBehaviour : MonoBehaviour
     public Rigidbody bulletPrefab;
     public GameObject enemyGunPoint;
     public GameObject pointsPrefab;
+    public GameObject victoryPrefab;
 
     public Gun equippedGun;
     public bool canShoot = true;
 
     //HealthSystem
-    public int maxHealth = 3;
+    public int maxHealth;
     public float currentHealth;
 
     private void Awake()
@@ -32,7 +33,7 @@ public class EnemyBehaviour : MonoBehaviour
         //Genere des points pour créer la patrouille du AI
         for (int i = 0; i < points.Length; i++)
         {
-            Vector3 randomSpawnPos = new Vector3(Random.Range(-8, 9), 0.5f, Random.Range(-8, 9));
+            Vector3 randomSpawnPos = new Vector3(Random.Range(-4, 5), 0.5f, Random.Range(-4, 5));
             var newPoints = Instantiate(pointsPrefab, transform.position + randomSpawnPos, Quaternion.identity);
             points[i] = newPoints.transform;
         }
@@ -53,12 +54,11 @@ public class EnemyBehaviour : MonoBehaviour
         {
             enemy.stoppingDistance = Enemy.EnemyDictionary[enemyName].EnemyStoppingDistance;
             enemy.SetDestination(playerTarget.position);
-            float distanceFromPlayer = Vector3.Distance(transform.position, playerTarget.position);
-            //Debug.Log(distanceFromPlayer);
             transform.LookAt(playerTarget.position);
+            float distanceFromPlayer = Vector3.Distance(transform.position, playerTarget.position);
             if (distanceFromPlayer < Enemy.EnemyDictionary[enemyName].EnemyShootingDistance && canShoot)
             {
-                transform.LookAt(playerTarget.position);
+                //transform.LookAt(playerTarget.position);
                 canShoot = false;
                 StartCoroutine(BulletDelay());
             }
@@ -106,6 +106,11 @@ public class EnemyBehaviour : MonoBehaviour
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
+
+            if(enemyName == "Dentist")
+            {
+                Instantiate(victoryPrefab, transform.position, Quaternion.identity);
+            }
         }
     }
 }
