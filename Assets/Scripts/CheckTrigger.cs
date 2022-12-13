@@ -25,7 +25,15 @@ public class CheckTrigger : MonoBehaviour
         if (other.tag == "Player") 
         {
            pickUp.inRange = true;
-            Debug.Log("j");
+            Debug.Log("entered");
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            pickUp.inRange = false;
+            Debug.Log("exited");
         }
     }
 }

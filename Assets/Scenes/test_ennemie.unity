@@ -286,23 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f56687605193ea41becc7b377ba0356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  player: {fileID: 543450652131581206}
-  whatIsGround:
-    m_Bits: 0
-  whatIsPlayer:
-    m_Bits: 0
-  health: 0
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointSet: 0
-  walkPointRange: 0
-  timeBetweenAttacks: 0
-  alreadyAttacked: 0
-  projectile: {fileID: 0}
-  sightRange: 0
-  attackRange: 0
-  playerInSightRange: 0
-  playerInAttackRange: 0
 --- !u!136 &149150280
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -801,6 +784,9 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   uiManager: {fileID: 0}
   infinityAmmoEffect: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!23 &328340774
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1474,6 +1460,7 @@ GameObject:
   - component: {fileID: 764168870}
   - component: {fileID: 764168869}
   - component: {fileID: 764168868}
+  - component: {fileID: 764168872}
   m_Layer: 0
   m_Name: ObjectPickUp
   m_TagString: Untagged
@@ -1560,6 +1547,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &764168872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764168867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a27999638bd33ee43929613710849d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0.25, z: 1}
+  putPlayerHere: {fileID: 543450652131581206}
 --- !u!1 &820231809
 GameObject:
   m_ObjectHideFlags: 0
@@ -5194,6 +5195,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickedUp: 0
   inRange: 0
+  isPressing: 0
+  timeBeforeRelease: 0.5
 --- !u!4 &5901452234264465301
 Transform:
   m_ObjectHideFlags: 0

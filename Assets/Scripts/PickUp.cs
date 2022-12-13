@@ -7,6 +7,9 @@ public class PickUp : MonoBehaviour
     //public float maxdistance;
     public bool isPickedUp;
     public bool inRange;
+    private float holdDownStartTime;
+    public bool isPressing;
+    public float timeBeforeRelease;
 
     public void Update()
     {
@@ -21,12 +24,65 @@ public class PickUp : MonoBehaviour
         {
             if(inRange)
             {
-                isPickedUp = true;
-                Debug.Log(";lkn");
+                //if (isPickedUp)
+                //{
+                //    if (Input.GetKeyDown(KeyCode.E))
+                //    {
+                //        isPickedUp = false;
+                //        Debug.Log("Dropped");
+                //    }
+                //}
+
+                if (isPickedUp==false)
+                {
+                    isPickedUp = true;
+                    Debug.Log("Picked-Up");
+                }
+                if (isPickedUp)
+                {
+                    holdDownStartTime = Time.time;
+                    isPressing = true;
+
+                }
+
             }
         }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            isPressing = false;
+        }
+        if(isPressing)
+        { 
+            if (Time.time - holdDownStartTime >= timeBeforeRelease)
+            {
+                isPickedUp = false;
+                Debug.Log("Dropped");
+            }
+        }
+        //if (isPickedUp)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.E))
+        //    {
+        //        isPickedUp = false;
+        //        Debug.Log("Dropped");
+        //    }
+        //}
+
+
+
 
     }
+    //public void LateUpdate()
+    //{
+    //    if (isPickedUp)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.E))
+    //        {
+    //            isPickedUp = false;
+    //            Debug.Log("Dropped");
+    //        }
+    //    }
+    //}
 
 
 
