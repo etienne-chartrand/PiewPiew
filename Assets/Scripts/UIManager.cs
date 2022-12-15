@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class UIManager : MonoBehaviour
 {
     public CharacterMovement characterMovement;
@@ -12,15 +13,24 @@ public class UIManager : MonoBehaviour
 
     public GameObject winScreen;
 
+    public GameObject Music;
+
     public GameObject gunSelection;
     public static int selectedGun;
 
     public Color selected;
     public Color unSelected;
 
+    public AudioSource Loosing;
+
+    public AudioClip loose;
+
+    public bool isDead;
+
     // Start is called before the first frame update
     void Start()
     {
+        isDead = false;
         gameOverScreen.SetActive(false);
 
         winScreen.SetActive(false);
@@ -35,12 +45,21 @@ public class UIManager : MonoBehaviour
             characterMovement.enabled = false;
 
             gameOverScreen.SetActive(true);
+
+            isDead = true;
+
+            Destroy(GameObject.FindWithTag("Music"));
+
+            
+          
         }
         if(characterMovement.jeuFini == true)
         { 
             winScreen.SetActive(true);
 
             characterMovement.enabled = false;
+
+            Destroy(GameObject.FindWithTag("Music"));
         }
     }
     public void RestartButton()
