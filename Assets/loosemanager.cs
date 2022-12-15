@@ -20,6 +20,6 @@ public class loosemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(UIManager.GetComponent<UIManager.GetComponent<isDead>
+        //if(UIManager.GetComponent<UIManager.GetComponent<isDead>
     }
 }

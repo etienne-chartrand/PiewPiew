@@ -32,6 +32,10 @@ public class CharacterMovement : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
+    // Sound
+    public AudioSource Walking;
+    public AudioSource Hurt;
+
     void Start()
     {
         playerSpeed = speed;
@@ -96,6 +100,7 @@ public class CharacterMovement : MonoBehaviour
         {
             currentHealth -= damage;
             healthBar.SetHealth(currentHealth);
+            Hurt.Play();
         }
     }
 
@@ -171,6 +176,7 @@ public class CharacterMovement : MonoBehaviour
         // We multiply the 'speed' variable to the Rigidbody's velocity...
         // and also multiply 'Time.fixedDeltaTime' to keep the movement consistant on all devices
         rb.velocity = direction * playerSpeed * Time.fixedDeltaTime;
+        Walking.Play();
     }
 
     //Dash
