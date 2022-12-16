@@ -20,6 +20,9 @@ public class GunManager : MonoBehaviour
 
     public LayerMask layerMask;
 
+    public AudioSource gunShot;
+    public AudioClip audioClip;
+
     private void Awake()
     {
         gunPoint = this.gameObject;
@@ -158,6 +161,7 @@ public class GunManager : MonoBehaviour
                     bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
                     bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
                     bulletCount.SetBulletCount(equippedGun.CurrentBulletMag);
+                    gunShot.PlayOneShot(audioClip);
                     yield return StartCoroutine(BulletTimer());
                 }
             }
