@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
 
     public bool isDead;
 
+    public bool won = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +58,8 @@ public class UIManager : MonoBehaviour
         if(characterMovement.jeuFini == true)
         { 
             winScreen.SetActive(true);
+
+            won = true;
 
             characterMovement.enabled = false;
 
