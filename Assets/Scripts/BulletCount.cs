@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//display du chargeur
 public class BulletCount : MonoBehaviour
 {
     public TMP_Text bulletCount;

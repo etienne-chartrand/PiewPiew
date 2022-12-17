@@ -40,7 +40,7 @@ public class Enemy
     {
                                      //Name          Health              Weapon                              Speed          StoppingDistance         ShootingDistance
         { "Stabber", new Enemy(     "Stabber",        100,       Gun.GunDictionary["Pistol"],                3.5f,               1f,                         2f)},
-        { "Shooter", new Enemy(     "Shooter",         80,       Gun.GunDictionary["Famas"],                  2f,                5f,                        14f)},
+        { "Shooter", new Enemy(     "Shooter",         80,       Gun.GunDictionary["Pistol"],                  2f,                5f,                        14f)},
         { "Dentist", new Enemy(     "Dentist",        800,       Gun.GunDictionary["ShotGun"],                2.5f,              7f,                        18f)}
     };
 }

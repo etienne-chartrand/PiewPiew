@@ -47,7 +47,7 @@ public class Gun
     public static Dictionary<string, Gun> GunDictionary = new Dictionary<string, Gun>()
     {
         //Identifier                 Name         FireRate  BulletSpeed     BulletTimer    HasBullet      maxBulletMag    CurrentBulletMag      ReloadTimer
-        {"Pistol", new Gun(        "Pistol",         1,     100,               0,            true,           12,               12,                 1f)},
+        {"Pistol", new Gun(        "Pistol",         1,     50,               0,            true,           12,               12,                 1f)},
         {"Famas", new Gun(         "Famas",          3,     200,              0.05f,          true,           30,               30,                 1.4f)},
         {"ShotGun", new Gun(       "ShotGun",        6,     50,                0,            true,            36,                36,                 1.5f)},
         {"MachineGun", new Gun(    "MachineGun",     1,     200,               0.03f,         true,           200,             200,                2.7f)},

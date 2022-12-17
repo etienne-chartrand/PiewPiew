@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckTrigger : MonoBehaviour
 {
-    
+    // check si le joueur est dans la trigger zonne autour de l'objet qu'on peut pick-up
     private GameObject player;
     private PickUp pickUp;
 
