@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    //Manage les differents screen du player
+
     public CharacterMovement characterMovement;
 
     public GameObject gameOverScreen;
@@ -50,20 +52,7 @@ public class UIManager : MonoBehaviour
 
             isDead = true;
 
-            Destroy(GameObject.FindWithTag("Music"));
-
-            
-          
-        }
-        if(characterMovement.jeuFini == true)
-        { 
-            winScreen.SetActive(true);
-
-            won = true;
-
-            characterMovement.enabled = false;
-
-            Destroy(GameObject.FindWithTag("Music"));
+            Destroy(GameObject.FindWithTag("Music")); 
         }
     }
     public void RestartButton()
@@ -85,5 +74,13 @@ public class UIManager : MonoBehaviour
                 gunSelection.transform.GetChild(i).GetComponent<Image>().color = unSelected;
             }
         }
+    }
+
+    //Player fini le jeu
+    public void PlayerWin()
+    {
+        characterMovement.enabled = false;
+        Destroy(GameObject.FindWithTag("Music"));
+        winScreen.SetActive(true);
     }
 }

@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class GunManager : MonoBehaviour
 {
+    //Permet de Switch les guns, reload, tirer
+
+    //Prefab
     public Rigidbody bulletPrefab;
     public GameObject gunPoint;
     public BulletCount bulletCount;
 
+    //Cam
     public Camera mainCam;
+
+    //LASER
     public LineRenderer lineRenderer;
 
     public Gun equippedGun;
     public UIManager uiManager;
-
 
     public bool infinityAmmoEffect;
     private bool isReloading = false;
 
     public LayerMask layerMask;
 
+    //SFX
     public AudioSource gunShot;
     public AudioClip audioClip;
 
@@ -42,7 +48,7 @@ public class GunManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Equipe l'arme voulu
+        //Equip l'arme voulu
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             equippedGun = Gun.GunDictionary["Pistol"];
@@ -128,7 +134,7 @@ public class GunManager : MonoBehaviour
             {
                 equippedGun.CurrentBulletMag--;
             }
-            
+            //Instantie balle en rb
             Rigidbody bullet;
             bullet = Instantiate(bulletPrefab, gunPoint.transform.position, transform.rotation) as Rigidbody;
             bullet.velocity = gunPoint.transform.forward * equippedGun.BulletSpeed;
@@ -203,7 +209,6 @@ public class GunManager : MonoBehaviour
         //Reduit le laser si on hit un objet
         if (Physics.Raycast(transform.position, transform.forward, out hit, 15.3f, layerMask ,QueryTriggerInteraction.Ignore))
         {
-            Debug.Log("yo");
             if (hit.collider.tag == "Enemy")
             {
                 EnemyBehaviour enemy = hit.collider.gameObject.GetComponent<EnemyBehaviour>();

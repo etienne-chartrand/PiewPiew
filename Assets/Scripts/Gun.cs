@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gun
 {
+    //Classe de gun avec differentes variables
     public string GunName { get; set; }
 
     public int FireRate { get; set; }
@@ -44,6 +45,7 @@ public class Gun
         ReloadTimer = reloadTimer;
     }
 
+    //Types de gun
     public static Dictionary<string, Gun> GunDictionary = new Dictionary<string, Gun>()
     {
         //Identifier                 Name         FireRate  BulletSpeed     BulletTimer    HasBullet      maxBulletMag    CurrentBulletMag      ReloadTimer

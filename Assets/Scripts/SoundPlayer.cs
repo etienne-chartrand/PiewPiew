@@ -28,7 +28,6 @@ public class SoundPlayer : MonoBehaviour
         {
             // Play the audio clip
             audioSource.PlayOneShot(soundToPlay);
-
             hasPlayed = true;
         }
     }

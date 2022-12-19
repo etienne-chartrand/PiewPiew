@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealZone : MonoBehaviour
 {
-    //Zone de heal
+    //Zone de heal lorsque player prends potion heal
     private GameObject player;
     private CharacterMovement playerCM;
     private PotionManager potionManager;

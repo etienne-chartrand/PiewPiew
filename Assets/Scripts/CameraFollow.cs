@@ -23,11 +23,13 @@ public class CameraFollow : MonoBehaviour
         cameraTransform = transform;
     }
 
+    //Dit quel joueur suivre
     public void SetTarget(Transform newTransformTarget)
     {
         followPlayer = newTransformTarget;
     }
 
+    //Suit le joueur
     private void LateUpdate()
     {
         if(followPlayer != null)

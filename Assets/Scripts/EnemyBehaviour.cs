@@ -5,22 +5,27 @@ using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    //Set le comportement d'enemy
     public string enemyName;
 
+    //Patrol & behaviour
     private NavMeshAgent enemy;
     public Transform[] points;
     public int current;
     public Transform playerTarget;
     public bool isClose;
+
+    //Prefab
     public Rigidbody bulletPrefab;
     public GameObject enemyGunPoint;
     public GameObject pointsPrefab;
     public GameObject victoryPrefab;
 
+    //Gun
     public Gun equippedGun;
     public bool canShoot = true;
 
-    //HealthSystem
+    //HealthSystem des enemy
     public int maxHealth;
     public float currentHealth;
 
@@ -58,7 +63,6 @@ public class EnemyBehaviour : MonoBehaviour
             float distanceFromPlayer = Vector3.Distance(transform.position, playerTarget.position);
             if (distanceFromPlayer < Enemy.EnemyDictionary[enemyName].EnemyShootingDistance && canShoot)
             {
-                //transform.LookAt(playerTarget.position);
                 canShoot = false;
                 StartCoroutine(BulletDelay());
             }

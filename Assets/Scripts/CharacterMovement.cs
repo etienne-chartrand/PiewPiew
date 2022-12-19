@@ -12,11 +12,12 @@ public class CharacterMovement : MonoBehaviour
     public HealthBar healthBar;
     private bool canTakeDamage;
 
-
-    // Add the variables
+    //SpeedSystem
     private float playerSpeed; //player speed
     private float speed = 500f; // Speed variable
     private float speedEffectPotion = 850f; //speed when taking a potion
+
+
     public Rigidbody rb; // Set the variable 'rb' as Rigibody
     public Vector3 movement; // Set the variable 'movement' as a Vector3 (x,y,z)
 
@@ -25,17 +26,18 @@ public class CharacterMovement : MonoBehaviour
 
     public bool jeuFini;
 
-    //Dash
+    //DashSystem
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 32f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
+
     // Sound
-   
     public AudioSource Hurt;
 
+    //Set les variables de base
     void Start()
     {
         playerSpeed = speed;
@@ -43,8 +45,6 @@ public class CharacterMovement : MonoBehaviour
         jeuFini = false;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-
-        // find the Rigidbody of this game object and add it to the variable 'rb'
         rb = this.GetComponent<Rigidbody>();
 
         mainCam = Camera.main;
@@ -53,22 +53,22 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
+        //if (isDashing)
+        //{
+        //    return;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TakeDamage(20);
-        }
 
-        // In Update we get the Input for left, right, up and down and put it in the variable 'movement'...
-        // We only get the input of x and z, y is left at 0 as it's not required
-        // 'Normalized' diagonals to prevent faster movement when two inputs are used together
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    TakeDamage(20);
+        //}
+
+        //Axe de movement
         movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 
 
+        //DASH
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
@@ -93,7 +93,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    //Player prends du damage
+    //Player prends du damage selon le nb qu'on veut
     public void TakeDamage(int damage)
     {
         if (canTakeDamage)
@@ -114,7 +114,7 @@ public class CharacterMovement : MonoBehaviour
     {
         StopCoroutine(Healing(0,0f));
     }
-
+    //Heal
     private IEnumerator Healing(int heal, float time)
     {
         if (currentHealth < maxHealth)
@@ -135,7 +135,7 @@ public class CharacterMovement : MonoBehaviour
     {
         StartCoroutine(SpeedPlayer(time));
     }
-
+    //SPEED
     private IEnumerator SpeedPlayer(float time)
     {
         WaitForSeconds wfs = new WaitForSeconds(time);
@@ -163,7 +163,6 @@ public class CharacterMovement : MonoBehaviour
         if(groundPlane.Raycast(cameraRay, out rayLength))
         {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            //Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
             transform.LookAt(new Vector3(pointToLook.x,transform.position.y,pointToLook.z));
         }
     }
@@ -176,10 +175,9 @@ public class CharacterMovement : MonoBehaviour
         // We multiply the 'speed' variable to the Rigidbody's velocity...
         // and also multiply 'Time.fixedDeltaTime' to keep the movement consistant on all devices
         rb.velocity = direction * playerSpeed * Time.fixedDeltaTime;
-        
     }
 
-    //Dash
+    //DASH
     private IEnumerator Dash()
     {
         canDash = false;

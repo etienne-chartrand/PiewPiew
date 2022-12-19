@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Potion
 {
+    //Class de potion avec differentes variables
     public string PotionName { get; set; }
 
     public float PotionTimeEffect { get; set; }
@@ -28,6 +29,7 @@ public class Potion
         PotionStack = potionStack;
     }
 
+    //Types de potion
     public static Dictionary<string, Potion> PotionDictionary = new Dictionary<string, Potion>()
     {
                                             //name        TimeEffect         IsAreaOfEffect              Stack

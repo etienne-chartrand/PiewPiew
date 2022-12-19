@@ -8,6 +8,7 @@ public class BulletCount : MonoBehaviour
 {
     public TMP_Text bulletCount;
 
+    //Reset le text lorsque change d'arme/reload
     public void SetBulletCount(int bulletInMag)
     {
         bulletCount.text = bulletInMag.ToString();

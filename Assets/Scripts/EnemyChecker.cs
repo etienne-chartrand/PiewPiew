@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyChecker : MonoBehaviour
 {
+    //Check si le player est proche poru changer le behaviour enemy
     private EnemyBehaviour enemyBehaviour;
 
     private void Start()

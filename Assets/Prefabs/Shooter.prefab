@@ -45,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773616260113333266}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -7726097746143804815, guid: 67718ed3d94d6ee429cfeb9c3b45e1e7, type: 3}
 --- !u!23 &773616260113333358
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24d01982981c80b48830f185fab92f27, type: 2}
+  - {fileID: 7325046090497753323, guid: 378d7f41b65fe2f4bb077cb31f413bf1, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,8 +99,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.99999964, y: 1.4324576, z: 0.99999964}
+  m_Center: {x: 0, y: 0.68684983, z: 0}
 --- !u!195 &773616260113333356
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &773616260113333357
@@ -147,6 +147,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6112559373709804631, guid: b3dc67fb70272ac4f9f29ccdc5a2d5f1, type: 3}
   enemyGunPoint: {fileID: 773616260331478246}
   pointsPrefab: {fileID: 6309202909177617449, guid: 4c57ad5353771ea44a0ac71e0f321fb6, type: 3}
+  victoryPrefab: {fileID: 0}
   canShoot: 1
   maxHealth: 3
   currentHealth: 0

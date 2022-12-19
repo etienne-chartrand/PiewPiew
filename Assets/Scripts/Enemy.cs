@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy
 {
+    //Class d'enemy avec variables
     public string EnemyName { get; set; }
 
     public int EnemyHealth { get; set; }
@@ -36,6 +37,7 @@ public class Enemy
         EnemyShootingDistance = enemyShootingDistance;
     }
 
+    //Types d'enemy
     public static Dictionary<string, Enemy> EnemyDictionary = new Dictionary<string, Enemy>()
     {
                                      //Name          Health              Weapon                              Speed          StoppingDistance         ShootingDistance

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InfinityAmmoZone : MonoBehaviour
 {
-    //Zone pour le infinity Ammo
+    //Zone pour le infinity Ammo potion
     private GameObject player;
     private CharacterMovement playerCM;
     private PotionManager potionManager;

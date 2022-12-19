@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 5670225218150035369}
   - component: {fileID: 5670225218151938000}
   - component: {fileID: 5670225218151938003}
-  - component: {fileID: 5670225218151937999}
+  - component: {fileID: 729648240}
   m_Layer: 0
   m_Name: VasePickup
   m_TagString: Untagged
@@ -86,7 +86,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5670225218152034665}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.3571718, y: -0.117, z: -80.55266}
   m_LocalScale: {x: 1.4861, y: 1.4861, z: 1.4861}
   m_ConstrainProportionsScale: 0
@@ -175,7 +175,7 @@ CapsuleCollider:
   m_Height: 0.49141148
   m_Direction: 1
   m_Center: {x: 0.000000014901161, y: 0.24570568, z: -0.000000074505806}
---- !u!114 &5670225218151937999
+--- !u!114 &729648240
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5670225218152034665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a27999638bd33ee43929613710849d0b, type: 3}
+  m_Script: {fileID: 11500000, guid: 632a6c729742a1740a0a082f1a60021e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 1, z: 1}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckTrigger : MonoBehaviour
 {
-    // check si le joueur est dans la trigger zonne autour de l'objet qu'on peut pick-up
+    // check si le joueur est dans la trigger zone autour de l'objet qu'on peut pick-up
     private GameObject player;
     private PickUp pickUp;
 
@@ -15,26 +15,21 @@ public class CheckTrigger : MonoBehaviour
         pickUp = player.GetComponent<PickUp>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-      
-    }
+    //Check si player est entré
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player") 
         {
-           pickUp.inRange = true;
-           Debug.Log("entered");
-          
+           pickUp.inRange = true; 
         }
     }
+
+    //Check si player est sortie
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
             pickUp.inRange = false;
-            Debug.Log("exited");
         }
     }
 }
